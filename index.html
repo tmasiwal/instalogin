@@ -130,8 +130,28 @@
                 const longLivedUserAccessToken = data.access_token;
                 console.log('Long-Lived User Access Token: ', longLivedUserAccessToken);
                 document.getElementById('status').innerHTML = 'Long-Lived User Access Token: ' + longLivedUserAccessToken;
+                getPageAccessToken(longLivedUserAccessToken);
             } catch (error) {
                 console.error('Error exchanging token: ', error);
+            }
+        }
+        async function getPageAccessToken(longLivedUserAccessToken) {
+            console.log('Fetching page access token...');
+            try {
+                const response = await fetch(`https://graph.facebook.com/v20.0/me/accounts?access_token=${longLivedUserAccessToken}`);
+                const data = await response.json();
+                console.log('Pages: ', data);
+                if (data.data && data.data.length > 0) {
+                    // Assuming you want the first page in the list
+                    const pageAccessToken = data.data[0].access_token;
+                    console.log('Page Access Token: ', pageAccessToken);
+                    document.getElementById('status').innerHTML += '<br>Page Access Token: ' + pageAccessToken;
+                } else {
+                    console.log('No pages found.');
+                    document.getElementById('status').innerHTML += '<br>No pages found.';
+                }
+            } catch (error) {
+                console.error('Error fetching pages: ', error);
             }
         }
     </script>
