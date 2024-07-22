@@ -125,7 +125,7 @@
         async function getUserAccessToken(shortLivedUserAccessToken) {
             console.log('Fetching long-lived user access token...');
             try {
-                const response = await fetch(`https://graph.facebook.com/v20.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1203449380793055&client_secret=YOUR_APP_SECRET&fb_exchange_token=${shortLivedUserAccessToken}`);
+                const response = await fetch(`https://graph.facebook.com/v20.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1203449380793055&client_secret=16de19d6959b8074e0aabfeee7368771&fb_exchange_token=${shortLivedUserAccessToken}`);
                 const data = await response.json();
                 const longLivedUserAccessToken = data.access_token;
                 console.log('Long-Lived User Access Token: ', longLivedUserAccessToken);
